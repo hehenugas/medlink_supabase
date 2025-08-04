@@ -97,6 +97,6 @@ export async function POST(req: NextRequest) {
     );
 
   } catch (error) {
-    return NextResponse.json({ error: 'Failed to login' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to login' + error, }, { status: 500 });
   }
 }
