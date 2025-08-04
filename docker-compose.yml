@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:alpine
+    container_name: medilink-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: medilinkdb
+      POSTGRES_USER: medilink_user
+      POSTGRES_PASSWORD: medilink_password
+    ports:
+      - 7671:5432
+    volumes:
+      - medilink-pgdata:/var/lib/postgresql/data
+
+  app:
+    image: aorus22/medilink:latest
+    container_name: medilink-app
+    restart: always
+    environment:
+      DATABASE_URL: "postgresql://medilink_user:medilink_password@postgres:5432/medilinkdb?schema=public"
+    ports:
+      - 7672:3000 # Next JS
+    depends_on:
+      - postgres
+
+volumes:
+  medilink-pgdata:
