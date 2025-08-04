@@ -57,9 +57,11 @@ export default function HealthcareMonitoringPage() {
     const connectWebSocket = () => {
       setWsStatus("connecting");
 
-      const isSecure = window.location.protocol === "https:";
-      const wsProtocol = isSecure ? "wss" : "ws";
-      const wsUrl = `${wsProtocol}://${window.location.host}/api/ws`;
+      const wsUrlEnv = process.env.NEXT_PUBLIC_WS_URL;
+
+      const wsUrl = wsUrlEnv
+        ? `${wsUrlEnv}/api/ws`
+        : `${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}/api/ws`;
 
       const ws = new WebSocket(wsUrl);
       wsRef.current = ws;
