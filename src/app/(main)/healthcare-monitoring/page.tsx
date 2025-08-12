@@ -60,7 +60,7 @@ export default function HealthcareMonitoringPage() {
       const wsUrlEnv = process.env.NEXT_PUBLIC_WS_URL;
 
       const wsUrl = wsUrlEnv
-        ? `${wsUrlEnv}/api/ws`
+        ? `${wsUrlEnv}`
         : `${window.location.protocol === "https:" ? "wss" : "ws"}://${window.location.host}/api/ws`;
 
       const ws = new WebSocket(wsUrl);
